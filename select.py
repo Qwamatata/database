@@ -14,8 +14,10 @@ def select(query):
     if ' WHERE ' in query:
         split_query2 = split_query[1].split(" WHERE ")
         table_name = split_query2[0]
-        condition = split_query2[1].split(' ')
-        conditions.append(condition)
+        condition_and_parts = split_query2[1].split(' AND ')
+        for part in condition_and_parts:
+            condition = part.split(' ')
+            conditions.append(condition)
     else:
         table_name = split_query[1].split(' ')[0]
 
@@ -61,7 +63,11 @@ def select(query):
         split_query2: str = split_query[1].split(' ORDER BY ')[1]
         column = split_query2.split(' ')[0]
         output = helpers.sort_data(output, f'{table_name}.{column}')
-    return output, columns
+    final_output = []
+    for record in output:
+        if check_conditions(record, conditions):
+            final_output.append(record)
+    return final_output, columns
 
 
 def make_table(output: list, columns: list):
