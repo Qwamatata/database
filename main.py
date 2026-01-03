@@ -2,7 +2,7 @@ import errors
 import create_table
 import insert
 import helpers
-import select
+import select_db
 
 
 def handle_query(query):
