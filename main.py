@@ -14,7 +14,7 @@ def handle_query(query):
             create_table.create_table(query)
             return 'Success!'
         elif query[0:6] == 'SELECT':
-            output, columns = select.select(query)
+            output, columns = select_db.select(query)
             return output, columns
         elif query[0:11] == 'INSERT INTO':
             insert.insert(
