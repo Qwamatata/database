@@ -3,9 +3,18 @@ import IlyasMessageProtocol
 import threading
 import main
 import json
+from sys import argv as a
+
+
+if len(a) == 1:
+    DB_HOST = '127.0.0.1'
+    DB_PORT = 10052
+else:
+    DB_HOST = '0.0.0.0'
+    DB_PORT = 10052
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind(('0.0.0.0', 10052))
+server_socket.bind((DB_HOST, DB_PORT))
 server_socket.listen()
 
 
