@@ -3,6 +3,7 @@ import create_table
 import insert
 import helpers
 import select_db
+import update
 
 
 def handle_query(query):
@@ -20,6 +21,8 @@ def handle_query(query):
             insert.insert(
                 query)
             return 'Success!'
+        elif query[0:6] == 'UPDATE':
+            update.update(query)
         else:
             return 'incorrect'
     except errors.DataBaseError as error:
